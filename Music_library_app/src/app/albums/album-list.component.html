@@ -1,0 +1,127 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Filter by Album:</div>
+      <div class="col-md-4">
+        <input type="text"
+               [(ngModel)]="listFilter" />
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="listFilter">
+      <div class="col-md-6">
+        <h4>Album: {{listFilter}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Composer:</div>
+      <div class="col-md-4">
+        <input type="text"
+               [(ngModel)]="listFilterComposer" />
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="listFilterComposer">
+      <div class="col-md-6">
+        <h4>Composer: {{listFilterComposer}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Artist:</div>
+      <div class="col-md-4">
+        <input type="text"
+               [(ngModel)]="listFilterArtist" />
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="listFilterArtist">
+      <div class="col-md-6">
+        <h4>Artist: {{listFilterArtist}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Date:</div>
+      <div class="col-md-4">
+        <input type="text"
+               [(ngModel)]="listFilterReleaseDate" />
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="listFilterReleaseDate">
+      <div class="col-md-6">
+        <h4>Date: {{listFilterReleaseDate}}</h4>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table mb-0"
+             *ngIf="albums && albums.length">
+        <thead>
+          <tr>
+            <th>
+             <!-- <button class="btn btn-outline-primary btn-sm"
+                      (click)="toggleImage()">
+                {{showImage ? "Hide" : "Show"}} Image
+              </button>-->
+            </th>
+            <th>Album</th>
+            <th>Code</th>
+            <th>Availability</th>
+            <th>Composer</th>
+            <th>Date of Release</th>
+            <th>Artist</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let album of filteredAlbums">
+            <td>
+              <!--<img 
+                   [src]="album.imageUrl"
+                   [title]="album.albumName"
+                   [style.width.px]="imageWidth"
+                   [style.margin.px]="imageMargin">-->
+                   <audio width="5px" height="5px" controls>
+                    <source src="assets/images/track1.mp3" type="audio/mpeg" style="width: 2mm;">
+                    Music
+                  </audio>
+            </td>
+            <td>
+              <a [routerLink]="['/albums', album.id]">
+                {{ album.albumName }}
+              </a>
+            </td>
+            <td>{{ album.albumCode }}</td>
+            <td>{{ album.albumAvail }}</td>
+            <td>{{ album.composer }}</td>
+            <td>{{ album.albumReleaseDate }}</td>
+            <td>{{ album.artist }}</td>
+            <td>{{ album.price | currency:"USD":"symbol":"1.2-2" }}</td>
+            <td>
+              <pm-star [rating]="album.starRating">
+              </pm-star>
+            </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm"
+                      [routerLink]="['/albums', album.id, 'edit']">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

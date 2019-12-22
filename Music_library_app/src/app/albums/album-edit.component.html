@@ -1,0 +1,153 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          (ngSubmit)="saveAlbum()"
+          [formGroup]="albumForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="albumNameId">Album Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="albumNameId"
+                 type="text"
+                 placeholder="Name (required)"
+                 formControlName="albumName"
+                 [ngClass]="{'is-invalid': displayMessage.albumName }" />
+          <span class="invalid-feedback">
+            {{displayMessage.albumName}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="albumCodeId">Album Code</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="albumCodeId"
+                 type="text"
+                 placeholder="Code (required)"
+                 formControlName="albumCode"
+                 [ngClass]="{'is-invalid': displayMessage.albumCode}" />
+          <span class="invalid-feedback">
+            {{displayMessage.albumCode}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="composerId">Composer</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="composerId"
+                 type="text"
+                 placeholder="Composer (required)"
+                 formControlName="composer"
+                 [ngClass]="{'is-invalid': displayMessage.composer }" />
+          <span class="invalid-feedback">
+            {{displayMessage.composer}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="artistId">Artist</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="artistId"
+                 type="text"
+                 placeholder="Artist (required)"
+                 formControlName="artist"
+                 [ngClass]="{'is-invalid': displayMessage.artist }" />
+          <span class="invalid-feedback">
+            {{displayMessage.artist}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="artistId">Release Date</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="releaseDateId"
+                 type="text"
+                 placeholder="Date (required)"
+                 formControlName="albumReleaseDate"
+                 [ngClass]="{'is-invalid': displayMessage.albumReleaseDate }" />
+          <span class="invalid-feedback">
+            {{displayMessage.albumReleaseDate}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="starRatingId">Star Rating (1-5)</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="starRatingId"
+                 type="text"
+                 placeholder="Rating (1-5)"
+                 formControlName="starRating"
+                 [ngClass]="{'is-invalid': displayMessage.starRating}" />
+          <span class="invalid-feedback">
+            {{displayMessage.starRating}}
+          </span>
+        </div>
+      </div>
+      
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="descriptionId">Description</label>
+
+        <div class="col-md-8">
+          <textarea class="form-control"
+                    id="descriptionId"
+                    placeholder="Description"
+                    rows=3
+                    formControlName="description"
+                    [ngClass]="{'is-invalid': displayMessage.description}"></textarea>
+          <span class="invalid-feedback">
+            {{ displayMessage.description}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="albumForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!albumForm.valid">
+            Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px;"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/albums']">
+            Cancel
+          </button>
+          <button class="btn btn-outline-warning"
+                  style="width:80px"
+                  type="button"
+                  title="Delete this Album"
+                  (click)="deleteAlbum()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>
